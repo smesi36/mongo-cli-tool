@@ -1,0 +1,50 @@
+[
+  {
+    "title": "fridge freezer",
+    "description": "Bosch - A reliable Bosch fridge freezer, energy efficient and spacious.",
+    "start_price": 150,
+    "reserve_price": 250
+  },
+  {
+    "title": "coffee table",
+    "description": "mahogany - Elegant mahogany coffee table, perfect for any living room.",
+    "start_price": 40,
+    "reserve_price": 80
+  },
+  {
+    "title": "graphics card",
+    "description": "Gtx 660 - NVIDIA GTX 660 graphics card, great for entry-level gaming.",
+    "start_price": 60,
+    "reserve_price": 120
+  },
+  {
+    "title": "bed and mattress",
+    "description": "king size - Comfortable king size bed and mattress, lightly used.",
+    "start_price": 200,
+    "reserve_price": 350
+  },
+  {
+    "title": "tallboy",
+    "description": "rimy wood - Sturdy rimy wood tallboy with five drawers.",
+    "start_price": 70,
+    "reserve_price": 130
+  },
+  {
+    "title": "chest of drawers",
+    "description": "solid wood - Solid wood chest of drawers, classic design.",
+    "start_price": 90,
+    "reserve_price": 160
+  },
+  {
+    "title": "Lawn mover",
+    "description": "electric - Electric lawn mower, easy to use and maintain.",
+    "start_price": 50,
+    "reserve_price": 100
+  },
+  {
+    "title": "Rear parcel shell",
+    "description": "for Mazda Demio DW - Rear parcel shelf suitable for Mazda Demio DW model.",
+    "start_price": 30,
+    "reserve_price": 60
+  }
+]

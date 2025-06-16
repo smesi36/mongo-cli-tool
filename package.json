@@ -1,0 +1,19 @@
+{
+  "name": "mongo-cli-tool",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "cli-seed.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "dotenv": "^16.5.0",
+    "mongoose": "^8.15.2"
+  }
+}
