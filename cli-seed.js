@@ -28,21 +28,24 @@ const auctionSchema = new mongoose.Schema({
 // Using the schema to create a model for the Auction collection
 const AuctionItem = mongoose.model("Auction", auctionSchema);
 
-// Chaining options for the CLI tool: 
+// Chaining options for the CLI tool:
 // name, description, version, flags, and help instructions
 program
-.name("mongo-cli-tool")
-.description("A CLI tool to seed or delete data in MongoDB")
-.version("1.0.0")
-.option("--import", "Import data from JSON file into DB")
-.option("--delete", "Delete all data from DB")
-.addHelpText('after', `
+  .name("mongo-cli-tool")
+  .description("A CLI tool to seed or delete data in MongoDB")
+  .version("1.0.0")
+  .option("--import", "Import data from JSON file into DB")
+  .option("--delete", "Delete all data from DB")
+  .addHelpText(
+    "after",
+    `
 Examples:
   node cli-seed.js --import
   node cli-seed.js --delete
-`)
-// parse method tells commander to parse the command-line arguments and options like --import or --delete
-.parse(); //end of the chain
+`
+  )
+  // parse method tells commander to parse the command-line arguments and options like --import or --delete
+  .parse(); //end of the chain
 
 // after parsing, opts method returns an object containing the parsed options, for example, if the user ran the command with --import, options.import will be true { import: true }.
 const options = program.opts();
@@ -53,21 +56,28 @@ if (options.import) {
 } else if (options.delete) {
   await deleteData();
 } else {
-  console.log("Please specify an option: --import or --delete");
+  console.log(chalk.yellow("Please specify an option: --import or --delete"));
 }
 
 // Data-importing function:
 
 async function importData() {
   try {
+    // Check if the auctionData.json file exists before attempting to read it
+    if (!fs.existsSync("auctionData.json")) {
+      throw new Error("auctionData.json file not found.");
+    }
     const data = JSON.parse(fs.readFileSync("auctionData.json", "utf-8"));
     await AuctionItem.insertMany(data);
     console.log(chalk.green("🎉 Data imported successfully!"));
-    process.exit(0); // Success exit code
+    process.exitCode = 0; // Success exit code
   } catch (error) {
     console.error(chalk.red(`❌ Error importing data: ${error.message}`));
-    process.exit(1); // Failure exit code
-  } 
+    process.exitCode = 1; // Failure exit code
+  } finally {
+    await mongoose.disconnect(); // Ensure the database connection is closed
+    process.exit();
+  }
 }
 
 // Data-deleting function:
@@ -75,9 +85,12 @@ async function deleteData() {
   try {
     await AuctionItem.deleteMany();
     console.log(chalk.green("🗑 All data deleted."));
+    process.exitCode = 0; // Success exit code
   } catch (error) {
     console.error(chalk.red(`❌ Failed to delete data: ${error.message}`));
+    process.exitCode = 1; // Failure exit code
   } finally {
+    await mongoose.disconnect(); // Ensure the database connection is closed
     process.exit();
   }
 }
